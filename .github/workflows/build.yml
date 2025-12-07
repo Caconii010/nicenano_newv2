@@ -39,20 +39,17 @@ jobs:
         run: west zephyr-export
 
       - name: West Build (PNCATEHO right)
-        run: west build -s zmk/app -b promicro_nrf52840 -- -DSHIELD=PNCATEHO_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        run: west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=PNCATEHO_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
 
       - name: PNCATEHO right DTS File
         if: ${{ always() }}
-        run: cat -n build/zephyr/promicro_nrf52840.dts.pre.tmp
+        run: cat -n build/zephyr/nice_nano_v2.dts.pre.tmp
 
       - name: PNCATEHO right Kconfig file
         run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
 
       - name: Rename zmk.uf2
-        run: cp build/zephyr/zmk.uf2 PNCATEHO_right_promicro_nrf52840.uf2
+        run: cp build/zephyr/zmk.uf2 PNCATEHO_right_nice_nano_v2.uf2
 
       - name: Archive (PNCATEHO right)
         uses: actions/upload-artifact@v4
-        with:
-          name: firmware
-          path: PNCATEHO_right_promicro_nrf52840.uf2
