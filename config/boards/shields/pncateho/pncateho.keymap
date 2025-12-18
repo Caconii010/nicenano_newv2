@@ -1,7 +1,7 @@
 /*
  * PNCATEHO left-only (12 keys): 2 rows x 5 + 2 thumbs
  *
- * Предлагаемый порядок 12 позиций в bindings:
+ * Порядок позиций в bindings:
  *   k00 k01 k02 k03 k04
  *   k10 k11 k12 k13 k14
  *   t0  t1
@@ -17,18 +17,13 @@
  *   Vol-  Vol+
  */
 
-/*
- * Copyright (c) 2020 The ZMK Contributors
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/ext_power.h>
 
-// CONFIG (оставил, как в твоём шаблоне — не мешает, даже если не используешь)
+// CONFIG (можно оставить, даже если сейчас не используешь)
 #define COMBO_TIMEOUT 70
 #define COMBO_LAYERS 0
 #define STICKY_TIMEOUT 500
@@ -42,9 +37,11 @@
 };
 
 / {
+  /* Узел combos оставляем пустым, без include "chords.dtsi",
+   * чтобы не ломать сборку, пока комбо не нужны.
+   */
   combos {
     compatible = "zmk,combos";
-    #include "chords.dtsi"
   };
 
   keymap {
