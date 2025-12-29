@@ -20,41 +20,13 @@ jobs:
             shield: corne_right
 
     steps:
-      - name: Checkout config repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Clone ZMK
-        run: |
-          git clone https://github.com/zmkfirmware/zmk.git
-          cd zmk
-          git checkout v0.3.0
-
-      - name: Setup Zephyr
-        run: |
-          pip3 install --user west
-          cd zmk
-          west init -l app
-          west update
-          west zephyr-export
-
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            git cmake ninja-build gperf \
-            ccache dfu-util device-tree-compiler \
-            python3-pip python3-setuptools python3-wheel \
-            xz-utils file wget
-
-      - name: Build firmware
-        run: |
-          cd zmk
-          west build -s app -b ${{ matrix.board }} --pristine always -- \
-            -DSHIELD=${{ matrix.shield }} \
-            -DZMK_CONFIG=$GITHUB_WORKSPACE/config
-
-      - name: Upload firmware
-        uses: actions/upload-artifact@v4
+      - name: Build ZMK firmware
+        uses: zmkfirmware/zmk-build-action@v1
         with:
-          name: ${{ matrix.shield }}-${{ matrix.board }}
-          path: zmk/build/zephyr/*.uf2
+          board: ${{ matrix.board }}
+          shield: ${{ matrix.shield }}
+          config: config
+
