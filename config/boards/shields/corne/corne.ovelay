@@ -1,0 +1,17 @@
+/ {
+    chosen {
+        zmk,underglow = &underglow;
+    };
+};
+
+&spi3 {
+    status = "okay";
+};
+
+underglow: ws2812 {
+    compatible = "worldsemi,ws2812-spi";
+    chain-length = <12>;
+    spi-max-frequency = <4000000>;
+    spi-one-frame = <0x70>;
+    spi-zero-frame = <0x40>;
+};
