@@ -1,12 +1,1 @@
-/ {
-    chosen {
-        zmk,underglow = &underglow;
-    };
-};
 
-underglow: ws2812 {
-    compatible = "worldsemi,ws2812-gpio";
-    chain-length = <21>;
-    data-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
-    status = "okay";
-};
