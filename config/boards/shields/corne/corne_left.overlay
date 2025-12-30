@@ -2,7 +2,7 @@
     compatible = "zmk,shield";
 };
 
-&spi1 {
+&spi3 {
     status = "okay";
 
     led_strip: ws2812 {
