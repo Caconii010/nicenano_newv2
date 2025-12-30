@@ -1,8 +1,10 @@
 / {
     compatible = "zmk,shield";
-};
 
-&led_strip {
-    status = "okay";
-    chain-length = <27>;
+    led_strip: ws2812 {
+        compatible = "worldsemi,ws2812-gpio";
+        label = "WS2812";
+        chain-length = <27>;
+        data-gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
+    };
 };
