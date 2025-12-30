@@ -1,0 +1,8 @@
+/ {
+    compatible = "zmk,shield";
+};
+
+&led_strip {
+    status = "okay";
+    chain-length = <27>;
+};
