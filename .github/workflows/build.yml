@@ -1,4 +1,3 @@
-
 name: Build ZMK Corne nice!nano
 
 on:
@@ -65,9 +64,13 @@ jobs:
             -DSHIELD=${{ matrix.shield }} \
             -DZMK_CONFIG=$PWD/../config
 
+      - name: Prepare firmware
+        run: |
+          mkdir -p firmware/${{ matrix.shield }}-${{ matrix.board }}
+          cp zmk/build/zephyr/zmk.uf2 firmware/${{ matrix.shield }}-${{ matrix.board }}/${{ matrix.shield }}-${{ matrix.board }}.uf2
+
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.shield }}-${{ matrix.board }}
-          path: zmk/build/zephyr/*.uf2
-
+          path: firmware/${{ matrix.shield }}-${{ matrix.board }}
