@@ -33,6 +33,7 @@ jobs:
           pip3 install --user west
           pip3 install --user pyelftools
 
+
           wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/zephyr-sdk-0.16.5_linux-x86_64.tar.xz
           tar xf zephyr-sdk-0.16.5_linux-x86_64.tar.xz
 
@@ -64,13 +65,8 @@ jobs:
             -DSHIELD=${{ matrix.shield }} \
             -DZMK_CONFIG=$PWD/../config
 
-      - name: Prepare firmware
-        run: |
-          mkdir -p firmware/${{ matrix.shield }}-${{ matrix.board }}
-          cp zmk/build/zephyr/zmk.uf2 firmware/${{ matrix.shield }}-${{ matrix.board }}/${{ matrix.shield }}-${{ matrix.board }}.uf2
-
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.shield }}-${{ matrix.board }}
-          path: firmware/${{ matrix.shield }}-${{ matrix.board }}
+          path: zmk/build/zephyr/
